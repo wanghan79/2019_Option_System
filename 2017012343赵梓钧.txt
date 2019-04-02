@@ -1,0 +1,24 @@
+//作业:信号量集的Swait和Ssignal
+Swait(S1,t1,d1,…,Sn,tn,dn)
+{
+	while(TRUE){
+		if (S1>=t1 && … && Sn>=tn ){
+			for (i=1;i<=n;i++)   
+				Si=Si-di;
+				break;
+		}else{ 
+			place the process in the waiting queue associated with the first Si found with Si<ti ,
+			and set the program countof this process to the beginning of the Swait Operation.
+		}
+	}
+}
+
+Ssignal(Si,di,…,Sn,dn)
+{
+	while (TRUE){   
+		for (i=1;i<=n;i++){
+			Si=Si+di;
+			Remove all the process waiting in the queue associated with Si into the ready queue.
+		}
+	}
+}
