@@ -1,4 +1,4 @@
-//嗜睡理发师问题
+//  the question of Sleepy Barber
 Monitor SleepyBarber{
    item  customer_chair[n];
    boolen  barber_chair;
@@ -51,6 +51,6 @@ Monitor SleepyBarber{
    void main( ){
      cobegin
      barber( );
-     '1customer( );
+     customer( );
      coend
    }
