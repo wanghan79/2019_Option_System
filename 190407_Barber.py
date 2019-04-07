@@ -33,6 +33,9 @@ class Barber():
     signal(BB)
 
 def cm():
+  if waiting == total:
+    leave
+    break
   while total:
     Barber.barber(total)
     total -= 1
@@ -42,8 +45,9 @@ def bb():
     Barber.customer();
 
 def main():
-  cm()
-  bb()
+  while true:
+    cm()
+    bb()
 
 if __name__ == '__main__':
   main()
