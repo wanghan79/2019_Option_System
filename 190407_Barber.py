@@ -1,53 +1,37 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-class Barber():
-  waiting = 0
+
+class BarberCustomer:
+  waitPerson = 0
   mutex = 1
-  N = 15
-  total = 30
-  # N 为座椅数量，total 为总顾客数
-  CM = 0
-  BB = 0
-  status = list()
-  for x in range(0, total):
-    status[x] = 0
-  # status[x] 用来表示某位顾客是否已经理发，0 为未理发，1 为已理发
+  seatNum = 15    # 空座椅数量
 
-  def barber(i):
-    wait(mutex)
-    if waiting < N:
-      waiting += 1
-      signal(mutex)
-      signal(CM)
-      wait(BB)
-      # Cut Hair
-      s[i] = 1
-    else:
+  barberAvailable = 0
+  customerAvailable = 0
+
+  def Barber():
+    while true:
+      wait(customerAvailable)
+      wait(mutex)
+      seatNum += 1
+      signal(barberAvailable)
       signal(mutex)
 
-  def customer():
-    wait(CM)
-    wait(mutex)
-    waiting -= 1
-    signal(mutex)
-    signal(BB)
-
-def cm():
-  if waiting == total:
-    leave
-    break
-  while total:
-    Barber.barber(total)
-    total -= 1
-
-def bb():
-  while true:
-    Barber.customer();
+  def Customer():
+    while true:
+      wait(mutex)
+      if (seatNum > 0):
+        seatNum -= 1
+        signal(customerAvailable)
+        signal(mutex)
+        wait(barberAvailable)
+      else:
+        signal(mutex)
 
 def main():
   while true:
-    cm()
-    bb()
+    BarberCustomer.Barber()
+    BarberCustomer.Customer()
 
 if __name__ == '__main__':
   main()
