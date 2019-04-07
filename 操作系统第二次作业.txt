@@ -1,0 +1,56 @@
+//嗜睡理发师问题
+Monitor SleepyBarber{
+   item  customer_chair[n];
+   boolen  barber_chair;
+   int in,out;
+   condition customer_chair_notfull,customer_chair_notempty,barber_chair_notfull,baber_chair_notempty;
+  int waiting;
+  Public:
+  void  barber_prepare(item x){
+   if (waiting==0)
+   cwait(customer_chair_notempty);
+   x=customer_chair[out];
+   out=(out+1)%n;
+   waiting--;
+   csignal(customer_chair_notfull);
+  }
+   void customer_inside(item x){
+   if(waiting == n)
+    leave;
+     customer_chair[in]=x;
+     in = ( in + 1 )% n;
+     waiting++;
+     csignal(customer_chair_notempty);
+    }
+    void barber_start( ){
+      cwait(barber_chair_notempty);
+      Barber started a haircut;
+      csignal(barber_chair_notfull);
+   }
+    void customer_waiting( ){
+       cwait(barber_chair_notfull);
+       Customer ready to have your hair cut;
+       csignal(barber_chair_notempty);
+   }
+   { in =0 ;out =0; waiting =0;}
+}BC;
+   void barber( ){
+      item x;
+      while(true){
+      BC.barber _prepare(x);
+      BC.barber_start();
+    }   
+  }
+      void customer( ){
+        item x;
+        while(true){
+        BC.customer_inside(x);
+        BC.customer_waiting( );
+     }  
+  }  
+   void main( ){
+     cobegin
+     barber( );
+     '1customer( );
+     coend
+   }
