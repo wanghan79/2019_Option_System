@@ -1,0 +1,32 @@
+Monitor PC():
+    mutex=1  #互斥量
+    CM=0    #顾客
+    BB=1     #理发师
+    SF=N     #沙发
+    sfnumbers #等待的人数
+    def Get_cut():
+        wait(mutex)            
+        if(sfnumbers<N):
+            sfnumbers++
+        signal(mutex)
+        signal(CM)
+        wait(BB)
+        get cut hair
+        go  
+
+    def Cut_hair():
+        wait(CM)
+        wait(mutex)
+        sfnumbers--
+        cut hair 
+        signal(mutex)
+        signal(BB)
+
+def Customer():
+        PC().Get_cut();
+def Barber():
+    while(1):    
+        PC().Cut_hair();
+def main():
+    Customer();
+    Barber();
