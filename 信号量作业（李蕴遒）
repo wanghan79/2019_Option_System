@@ -1,0 +1,21 @@
+Swait(S1,t1,d1,S2,t2,d2,…,Sn,tn,dn)
+{
+  if(S1>=t1&&…&&Sn>=tn)
+  {
+      for(i=1;i<=n;i++)
+        Si=Si-di;
+  }
+  else
+  {
+     Place the process in the waiting queue associated with the Si found with Si＜ti,
+      and set the program count of this process to the beginning of Swait operation.
+  }
+}
+Ssignal(S1,t1,d1,S2,t2,d2,…,Sn,tn,dn)
+{
+  for(i=1;i<=n;i++)
+  {
+    Si=Si+di;
+    Remove all the process waiting in the queue associated with Si  into the ready queue.
+  }
+}
