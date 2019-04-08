@@ -1,0 +1,33 @@
+semaphore Customers,babers,mutex;
+Customers=0;
+barbers=0;
+waiting=0;
+mutex=1;
+
+barber( ) 
+{
+    while(TRUE) 
+    {
+      wait(customers);  
+      wait(mutex); 
+      waiting=waiting-1; 
+      signal(barbers)； 
+      signal(mutex); 
+      Cut_hair();
+    }
+}
+Customer （int i）
+{
+	  wait(mutex); 
+    if(waiting<N) 
+    {	
+      waiting=waiting+1; 
+      signal(customers); 
+      signal(mutex); 
+      wait(barbers); 
+      have a haircut;
+    }
+    else
+      signal(mutex);
+      leave;
+}
