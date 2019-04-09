@@ -1,34 +1,34 @@
 Monitor procducerconsumer():
-    watting=0;mutex=1;N=10;CM=0;BB=0;total=20;
+    watting=0,mutex=1,N=10,CM=0,BB=0,total=20
     for i in range(0,total+1):
-        s[i]=0;
+        s[i]=0
 
     def Get_haircut(i):
-        wait(mutex);				      
-        if(waiting<N):
-            waiting++;
-            signal(mutex);
-            signal(CM);
-            wait(BB);
-            Àí·¢;
-            s[i]=1;
+        wait(mutex)			      
+        if(waiting<N)
+            waiting++
+            signal(mutex)
+            signal(CM)
+            wait(BB)
+            cut
+            s[i]=1
         else:
-            signal(mutex);
+            signal(mutex)
 
     def Cut_hair():
-        wait(CM);	
-        wait(mutex);
-        waitting--;
-        signal(mutex);
-        signal(BB);
+        wait(CM)
+        wait(mutex)
+        waitting--
+        signal(mutex)
+        signal(BB)
 
 def Customer():
     while(total--):
-        procducerconsumer.Get_haircut(total);
+        procducerconsumer.Get_haircut(total)
 def Barber():
     while(1):    
-        procducerconsumer.Cut_hair();
+        procducerconsumer.Cut_hair()
 
 def main():
-    Customer();
-    Barber();
+    Customer()
+    Barber()
