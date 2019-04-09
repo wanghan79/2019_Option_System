@@ -1,0 +1,51 @@
+monitor barber-customer {
+    int cout;
+    int chairnumber=n;
+    condition barber,customer,empty;
+    entry customer(item)
+    {
+        empty.wait; 
+        if(cout<n)
+        {
+          barber.wait;
+          cout--;
+          customer.signal;
+        }
+        else
+       {
+           get out();
+       } 
+    }
+    entry barber(item)
+   { 
+       sleep();
+       customer.wait;
+       cut hair();
+       barber.signal;
+       empty.signal;
+    }
+} pc;
+void barber()
+{
+   while(1£©
+   {
+       come a customer;
+       pc.barber(item);
+   }
+}
+void customer()
+{
+    while(1);
+      {
+         leave a customer;
+         pc.costomer(item);
+      }  
+}
+main()
+{
+    cobegin
+    {
+       barber();
+       customer();
+    }
+}
