@@ -1,0 +1,30 @@
+Swait(S1,t1,d1,...,Sn,tn,dn)
+{
+        while(1)
+                {
+    	        if(S1>=t1&&...&&Sn>=tn)
+		{
+		        for(i=1;i<n;i++)
+			Si-=di;
+		        break;
+		}
+        	        else
+		{
+		        /*将接收过程放入与Si<Ti的第一个Si相关联的等待队列中，并将进程的程序计数设置为swait操作的开始*/
+		}
+	}
+}
+
+
+Ssignal(S1,d1,...,Sn,dn)
+{
+        while(1)
+        {
+	for(i=1;i<n;i++)
+	{
+	        Si+=di;
+	        /*将与SI关联的队列中等待的所有进程移入就绪队列*/
+	}
+        }
+}
+ 
