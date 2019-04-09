@@ -1,0 +1,24 @@
+Semaphore mutex=1；
+guest():{
+while(1){
+wait(mutex);
+if(count>=N){
+signal(mutex);
+顾客离开；
+}
+else{
+signal(mutex);
+count++;
+坐入；
+mait(empty);
+wait(mutex);
+cout--;
+signal(mutex);
+signal(full);
+理发；
+付费；
+signal(payment);
+wait(receipt);
+signal(empty);
+离开；
+}
