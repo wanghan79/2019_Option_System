@@ -1,0 +1,33 @@
+Monitor barberShop{
+	int waitNum;
+	condition getCut,barberSleep,cutDone;
+	
+	public:
+	Barber routine
+	barber(){
+		while(true){
+			while(waitNum==0){
+				barberSleep.wait();
+			}
+			customerWait.signal();
+			//give the curstomer a hair-cut..
+			cutDone.signal();//convey an information
+			  
+		}
+	}
+  
+	
+	Customer routine
+	customer(){
+		if(waitNum>=n){
+			//leave the shop
+		}
+		if(waitNum==0){
+		barberSleep.signal();//means there no customer before,so he needs to wake up barber
+		}
+		customerWait.wait();
+		//get a hair-cut
+		cutDone.wait();
+	}
+
+}
