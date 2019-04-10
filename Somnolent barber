@@ -1,0 +1,27 @@
+monitor barber-Customer{
+int waiting,N;
+condition X,Y;
+entry barber
+{
+  X.wait;
+  waiting=waiting-1;
+  Y.signal;
+  Get hair();
+}
+entry Customer
+{
+  X.wait;
+  if(waiting<N)
+  {
+    waiting=waiting+1;
+    Y.signal;
+    X.wait;
+    have a haircut;
+  }
+  else Y.signal;
+  leave;
+}
+{
+  waiting=0;
+}
+};
