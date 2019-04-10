@@ -1,0 +1,24 @@
+Swait(S1, t1, d1, …, Sn, tn, dn) 
+{ 
+    while (TRUE) 
+     { 
+       if (S1 >= d1>= t1 && S2 >= d2 >= t2 && … && Sn >= dn >=tn) 
+      { //满足资源要求时的处理； 
+       for (i = 1; i <= n; i++) Si= Si-di; 
+         break; 
+      } 
+       else 
+     { 
+       调用进程进入第一个不符合条件的Si的等待队列里; 
+       (reset PC重置程序计数器)阻塞调用进程; 
+      } 
+     } 
+}
+Ssignal(S1, d1, …, Sn, dn) 
+{    while (TRUE) 
+     { 
+       for (i = 1; i <= n; i++) 
+       {Si= Si+di; 
+       进程从等待队列进入准备队列；}
+     } 
+ }
