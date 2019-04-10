@@ -22,7 +22,7 @@ Monitor barberShop{
 			//leave the shop
 		}
 		if(waitNum==0){
-		barberSleep.signal();//means there no customer before,need to wake up barber
+		barberSleep.signal();//means there no customer before,so he needs to wake up barber
 		}
 		customerWait.wait();
 		//get a hair-cut
