@@ -2,7 +2,7 @@ Swait(S1, t1, d1, …, Sn, tn, dn)
 { 
     while (TRUE) 
      { 
-       if (S1 >= d1>= t1 && S2 >= d2 >= t2 && … && Sn >= dn >=tn) 
+       if (S1 >= d1 && d1>= t1 && S2 >= d2 && d2>= t2 && … && Sn >= dn && dn>=tn) 
       { //满足资源要求时的处理； 
        for (i = 1; i <= n; i++) Si= Si-di; 
          break; 
