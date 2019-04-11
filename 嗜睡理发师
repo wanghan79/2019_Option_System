@@ -1,0 +1,54 @@
+
+monitor sleepybarber
+{
+	int barber=1;
+	int customer=0;
+	int mutex=1;
+	int chair=10;
+	void customer_()
+	{		
+		wait(mutex);
+		if(chair>0)
+		{
+			chair-=chair;
+			signal(customer)��
+			signal(mutex);
+			wait(barber);
+			//��������������
+		}
+		else
+		{
+			signal(mutex);
+		}	
+	}
+	void barber_()
+	{
+		wait(customer);
+		wait(mutex);
+		chair+=chair;
+		signal(mutex);
+		//��������������
+		signal(barber);
+	}
+}pc;
+void pa()
+{
+	while(true)
+	{
+		pc.customer_();
+	}
+}
+void pb()
+{
+	while(true)
+	{
+		pc.barber_();
+	}
+}
+int main()
+{
+	pa();
+	pb();
+}
+
+
