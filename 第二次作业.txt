@@ -1,0 +1,41 @@
+monitor barbercustomer{
+int sofa;
+int barber_chair;
+int customers;
+int mutex;
+int leave_barberchair;
+public:
+void customer(){
+wait(sofa);
+sit_on_sofa(); 
+wait(barber_chair); 
+get_up_sofa(); 
+signal(sofa);
+sit_on_barberchair(); 
+signal(customer_ready);
+barber_number=dequeue(); 
+wait(finished[barber]); //等待理发结束
+get_up_barberchair(); 
+signal(leave_barberchair);
+exit_shop(); 
+}
+void barber(int i)
+{
+while(true)
+{
+enqueue(i); 
+wait(customers); 
+wait(mutex);
+cut_hair(); 
+signal(mutex);
+signal(finished); 
+wait(leave_barberchair); 
+signal(barber_chair); //释放barber_chair 信号
+}
+}
+void main（）{
+cobegin
+barber();customer();
+coend
+}
+}
