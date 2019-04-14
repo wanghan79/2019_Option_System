@@ -1,3 +1,5 @@
+Monitor producecustomer
+{
 int waiting;
 int chairs;
 semaphore Customers,barbers,mutex;
@@ -50,5 +52,6 @@ main()
 cobegin
 {  Customeri();
    Barber();
+}
 }
 }
