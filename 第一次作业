@@ -1,0 +1,24 @@
+Swait(S1,t1,d1,...,Sn,tn,dn)
+{
+while(TRUE)
+{
+if(S1>=t1&&S2>=t2...&&Sn>=tn)
+{
+for(i=1;i<=n;i++)
+Si=Si-di;
+break;
+}
+else
+{
+place the ececuting process in the waiting queue of the first Si with Si<ti and set its program counter to the beginning of the  Swait Operation.
+}
+}
+Ssignal(S1,d1,...,Sn,dn)
+while(TRUE)
+{
+for(i=1;i<=n;i++)
+{
+Si=Si+di;
+Remove all the process waiting in the queue associated with Si into the ready queue.
+}
+}
