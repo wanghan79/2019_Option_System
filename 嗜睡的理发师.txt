@@ -1,57 +1,43 @@
-Monitor producecustomer
-{
-int waiting;
-int chairs;
-semaphore Customers,barbers,mutex;
-Customers=0;
-barbers=0;
-waiting=0;
-mutex=1;
-
-void Barber()//Àí·¢Ê¦½ø³Ì
-{
-  while(TRUE)
-  {
-    wait(customers);//Ã»ÓĞ¹Ë¿Í£¬Àí·¢Ê¦Ë¯¾õ
-    wait(mutex);
-    waiting=waiting-1;
-    signal(barbers);//Àí·¢Ê¦¹¤×÷
-    signal(mutex);//Àë¿ªÁÙ½çÇø
-    cut_hair();
-  }
-}
-
-void Customeri()//¹Ë¿ÍiµÄ½ø³Ì
-{
-  wait(mutex);
-  if(count>N)//Àí·¢µêÃ»ÓĞ¿ÕÎ»
-   {signal(mutex)
-     exit shop;
-   }
-  else
-   {
-    count=count+1;
-    if(count>1)//Àí·¢µêÓĞ¿ÍÈË£¬ĞèÒª×øÔÚÉ³·¢ÉÏµÈ´ı
-    {signal(mutex);
-     wait(sofa);//ÉêÇëÉ³·¢
-     sit on the sofa;
-     wait(empty);//ÉêÇëÀí·¢ÒÎ
-     get up from sofa;
-     signal(sofa);//¹é»¹É³·¢
-    }
-   else
-  {signal(mutex);
-   wait empty;//Ö»ÓĞÒ»¸öÈË£¬¿ÉÖ±½ÓÉêÇëÀí·¢ÒÎ
-  }
-  sit on the barber_chair;
-  signal(full);
-  wait(cut);
-
-main()
-{
-cobegin
-{  Customeri();
-   Barber();
-}
-}
-)
+ï»¿monitor barber&customer{
+        customer;
+        barber=1;
+        mutex=1;
+        N;//ä½ç½®æ•°
+        def waitcut()
+            {
+                wait(mutex);    
+                if(customer>=N)
+                é¡¾å®¢ç¦»å¼€;
+                else
+                    customer++;
+                    signal(customer);
+                    signal(mutex);
+                    wait(bueber);
+                    }
+        def cut()
+            {  
+                 if(customer>0)  
+                 wait(customer)
+                 signal(mutex);
+                 ç†å‘;
+                 customer--;
+                 signal(barber);
+                 wait(mutex);
+                    }
+        def customer():
+            {
+                barber&customer.waitcut()
+                be cut;
+                    }
+        def barber():
+            {
+                  barber&customer.cut()  
+                  cut;
+                    }
+            void main()
+            {
+                    customer()
+                    barber()
+                    }
+            }
+        
