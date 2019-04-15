@@ -1,0 +1,43 @@
+monitor barber&customer{
+        customer;
+        barber=1;
+        mutex=1;
+        N;//位置数
+        def waitcut()
+            {
+                wait(mutex);    
+                if(customer>=N)
+                顾客离开;
+                else
+                    customer++;
+                    signal(customer);
+                    signal(mutex);
+                    wait(bueber);
+                    }
+        def cut()
+            {  
+                 if(customer>0)  
+                 wait(customer)
+                 signal(mutex);
+                 理发;
+                 customer--;
+                 signal(barber);
+                 wait(mutex);
+                    }
+        def customer():
+            {
+                barber&customer.waitcut()
+                be cut;
+                    }
+        def barber():
+            {
+                  barber&customer.cut()  
+                  cut;
+                    }
+            void main()
+            {
+                    customer()
+                    barber()
+                    }
+            }
+        
