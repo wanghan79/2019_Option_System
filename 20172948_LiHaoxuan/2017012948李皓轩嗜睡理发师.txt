@@ -25,4 +25,4 @@ consumer():
 
 def main():
     consumer.Customer()
-consumer.Barber()
+    consumer.Barber()
