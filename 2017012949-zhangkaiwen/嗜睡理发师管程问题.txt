@@ -1,0 +1,49 @@
+Monitor procducerconsumer{
+	int  mutex,N,bb,cm,sf,waiting; 
+	public：
+	void barber_do()
+	{
+		wait(cm); 
+		waiting--; 
+	}
+	void costom_do()
+	{
+		wait(mutex);
+		if(waiting<N)
+		{
+			waiting++;
+			signal(mutex);
+                                                signal(cm);
+			wait(bb);
+                                                signal(bb);
+		}
+		else
+		{
+			signal(mutex);			
+		}
+	}
+{mutex=1,N=20,bb=1,cm=0,sf=0,waiting=0} 
+		 }  PC; 
+void barber()
+{
+	while(1)
+	{
+		PC.put_barber();
+		理发
+		睡觉 
+	}
+} 
+void custom()
+{
+	while(1)
+	{
+		PC.get_barber();
+		被理发
+                                离开	
+	}
+} 
+void main()
+{
+	barber();
+	custom();
+} 
