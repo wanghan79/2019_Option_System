@@ -1,0 +1,36 @@
+customers = 0
+barbers = 0
+mutex = 1
+customerwaiting = 0
+CHAIRS = 5
+ 
+def customer():
+    mutex.acquire()
+    if (customerwaiting<CHAIRS):   #有座
+        customerwaiting+=1
+        customers.release()
+        mutex.release()
+        barbers.acquire()
+    else:
+        mutex.release()      #没座
+ 
+ def barber():
+    while(1):
+        if(customerwaiting==0):     #睡觉
+        customers.acquire()
+        mutex.acquire()
+        customerwaiting-=1          #剪头
+        barbers.release()
+        mutex.release()
+        haircut()
+ 
+ 
+def haircut():
+    t1 = target=barber           #唤醒等待
+    t1.start()
+    t1.join(1)
+while(1):
+        try:
+            t2 = target=customer
+            t2.start()
+t2.join(1)
