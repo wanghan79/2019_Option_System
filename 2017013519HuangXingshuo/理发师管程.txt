@@ -1,0 +1,48 @@
+Monitor BarberCustomer
+{
+    person sofa[N];
+    int waitings = 0;
+    condition notEmpty, notFull;
+    int l = 0, r = 0;   //sofa 队列中队头位置和队尾的尾后位置
+    void sleepOrCutHair(person x)
+    {
+        if(waitings <= 0) cwait(notEmpty);//没人等待理发，睡觉~
+        x = sofa[l];        //给x理发
+        l = (l + 1) % N;
+        waitings--;
+        csignal(notFull);
+    }
+    void waitToGetCutOrLeave(person x)
+    {
+        if(waitings == N) go out;   //沙发位置已经满了，顾客离开
+        sofa[r] = x;
+        r = (r + 1) % N;
+        waitings++;
+        csignal(notEmpty);
+    }
+}MB;
+
+void barber()
+{
+    person x;
+    while(true)
+    {
+        MB.sleepOrCutHair(x);
+    }
+}
+
+void customer()
+{
+    person x;
+    while(true)
+    {
+        a customer come in;
+        MB.waitToGetCutOrLeave(x);
+    }
+}
+
+void main()
+{
+    barber();
+    customer();
+}
