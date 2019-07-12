@@ -1,0 +1,26 @@
+// 操作系统 第一次作业信号量集
+Swait(S1,t1,d1,......,Sn,tn,dn)
+{
+    while(TURE)
+        {
+             if(S1>=t1&&......&&Sn>=tn){
+                  for(i=1;i<=n;i++)
+                         Si=Si-di;
+                       break;
+              }
+             else  {
+                 Place the process in the waiting queue associate with the first Si found 
+                 with Si<ti,and set the program count of this process to the beginning
+                 of Swait operation
+                }
+            }
+     }
+Ssignal(S1,d1,......,Sn,dn){
+          while(TURE){
+               for(i=1;i<=n;i++){
+                Si=Si+di;
+              Remove all the process waiting in the queue associated with Si into
+             the  ready queue
+               }
+           }
+      }
