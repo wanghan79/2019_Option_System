@@ -1,0 +1,164 @@
+﻿Skip to content
+
+
+  
+Pull requests 
+Issues 
+Marketplace 
+Explore 
+
+
+
+ 
+
+
+Watch 
+1 
+Star 
+2 
+Fork 
+11 
+
+wanghan79/2019_Option_System 
+Code 
+Issues 0 
+Pull requests 8 
+Projects 0 
+Wiki 
+Security 
+Insights 
+Branch: 2017011868_che… 
+2019_Option_System/嗜睡理发师 
+Find file 
+Copy path 
+ nenucyg Create 嗜睡理发师 
+599ba21 on 11 Apr 
+1 contributor 
+55 lines (51 sloc) 597 Bytes 
+Raw
+Blame
+History
+
+
+
+
+monitor sleepybarber
+
+{
+
+	int barber=1;
+
+	int customer=0;
+
+	int mutex=1;
+
+	int chair=10;
+
+	void customer_()
+
+	{		
+
+		wait(mutex);
+
+		if(chair>0)
+
+		{
+
+			chair-=chair;
+
+			signal(customer)��
+
+			signal(mutex);
+
+			wait(barber);
+
+			//��������������
+
+		}
+
+		else
+
+		{
+
+			signal(mutex);
+
+		}	
+
+	}
+
+	void barber_()
+
+	{
+
+		wait(customer);
+
+		wait(mutex);
+
+		chair+=chair;
+
+		signal(mutex);
+
+		//��������������
+
+		signal(barber);
+
+	}
+
+}pc;
+
+void pa()
+
+{
+
+	while(true)
+
+	{
+
+		pc.customer_();
+
+	}
+
+}
+
+void pb()
+
+{
+
+	while(true)
+
+	{
+
+		pc.barber_();
+
+	}
+
+}
+
+int main()
+
+{
+
+	pa();
+
+	pb();
+
+}
+
+
+
+
+
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+
