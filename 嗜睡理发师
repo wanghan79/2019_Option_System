@@ -1,0 +1,95 @@
+var count:integer:=0;
+
+mutex,sofa,empty,full:=semaphore:=1,N,1,0;
+
+cut,payment,receipt:semaphore:=0,0,0;
+
+begin
+
+          parbegin
+
+                            guest:begin
+
+                                                       wait(mutex);
+
+                                                       if(count>N) then    
+
+                                                       begin
+
+                                                       signal(mutex);
+
+                                                       离开理发店;
+
+                                                       end
+
+                                                       else
+
+                                                      begin
+
+                                                                 count:=count+1;
+
+                                                                  if(count>1) then
+
+                                                     begin
+
+                                                                 wait(sofa);
+
+                                                                去沙发上坐;
+
+                                                                wait(empty);
+
+                                                                 从沙发上起来;
+
+                                                                signal(sofa);
+
+                                                    end
+
+                                                     else
+
+                                                                wait(empty);
+
+                                                                  去理发;
+
+                                                                 signal(full);
+
+                                                                理发;
+
+
+
+                                                              wait(receipt);
+
+                                                              从理发椅上起来;
+
+                                                                signal(empty);
+
+                                                               wait(mutex);
+
+                                                              count:=count-1;
+
+                                                               signal(mutex);
+
+                                                               离开理发店:
+
+                                                        end
+
+                                      end
+
+                                              barber:begin
+
+                                                           repeat
+
+                                                             wait(full);
+
+                                                            给顾客理发:
+
+
+
+                                                             signal(recipt);
+
+                                                    until false
+
+                                                 end
+
+             parend
+
+end
