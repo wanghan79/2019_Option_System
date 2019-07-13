@@ -27,6 +27,6 @@ int main()
     cin>>idol;
     string path = "E:\\"+idol+"\\";
     dir(path);
-    system("pause");
+    //system("pause");
     return 0;
 }
