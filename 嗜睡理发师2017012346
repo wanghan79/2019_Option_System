@@ -1,0 +1,34 @@
+# define CHAIRS 5 /*为等待的顾客准备的椅子数*/
+ int customers=0,barbers=0,mutex=1; /*用于互斥*/
+ int waiting=0; /*等待的顾客(还没理发的)*/
+
+	void barber(void)
+	{
+		while(TRUE)
+		{
+			P(customers); 
+			/*如果顾客数是0，则睡眠*/
+			P(mutex); 
+			waiting=waiting-1; /*等待顾客数减1*/
+			V(barbers); 
+			/*一个理发师现在开始理发了*/
+			V(mutex); /*释放等待*/
+			理发;
+		}
+	}
+
+    void customers(void)
+   {
+       P(mutex);/*进入临界区*/
+       if(waiting < CHAIRS)
+       {/*如果没有空椅子，就离开*/
+          waiting = waiting + 1;/*等待顾客数加1*/
+          V(customers);  /*如果必要的话，唤醒理发师*/
+          V(mutex); /*释放访问等待*/
+          P(barbers);/*如果barbers为0，就入睡*/
+          坐下理发；
+        }
+        else
+           V(mutex);/*店里人满了，走吧*/
+    }
+       
