@@ -1,0 +1,36 @@
+1.安全
+{p4,p5,p1,p2,p3}
+2.不能
+T0时刻，Available(2,3,3)
+Request2(0,3,4)>Available(2,3,3) 请求不合理
+3.能
+Request4(2,0,1)的请求合理
+尝试分配：
+	
+                Work	Need	Allocation	Work+Allocation	 Finish
+
+P4	(0,3,2) 	(0,2,0)	(4,0,5)	  (4,3,7)	                  TRUE
+P5	(4,3,7)	(1,1,0)	(3,1,4)	  (7,4,11)	                  TRUE
+P1	(7,4,11)	(3,4,7)	(2,1,2)	  (9,5,13)	                  TRUE
+P2	(9,5,13)	(1,3,4)	(4,0,2)	  (13,5,15)	                  TRUE
+P3 	(13,5,15)	(0,0,6)	(4,0,5)	  (17,5,20)	                  TRUE
+    			  	   	  	 	 					 	 					
+4.不能
+P1:Request(0,2,0)<P1:Need(3,4,7)
+P1:Request(0,2,0)<P1:Available(0,3,2)  =>请求合理
+尝试分配：
+	
+                Work	Need	Allocation	 Work+Allocation	 Finish
+P1	(0,3,2)	(0,2,0)	(2,1,2)	(0,1,2)		TRUE
+P4	(0,1,2)	(2,2,1)	(2,0,4)		                FALSE
+P5		(1,1,0)	(3,1,4)		
+P1		(3,2,7)	(2,3,2)		
+P2		(1,3,4)	(4,0,2)		
+P3		(0,0,6)	(4,0,5)		
+       
+	Available(0,1,2)<P4Need:(2,2,1)
+	Available(0,1,2)<P5Need:(1,1,0)
+	Available(0,1,2)<P1Need:(3,2,7)
+	Available(0,1,2)<P2Need:(1,3,4)
+	Available(0,1,2)<P3Need:(0,0,6)
+	这时处于不安全状态，所以不能分配，分配无效
