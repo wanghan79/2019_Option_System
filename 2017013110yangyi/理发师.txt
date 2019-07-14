@@ -1,0 +1,40 @@
+Class barberCut(){
+	int  mutex=N,bb=1,cm=0,sf=N;
+	void barber()
+	{
+		wait(cm); 
+		sf--; 
+	}
+	void cut()
+	{
+		wait(mutex);
+		if(sf<N)
+		{
+			sf++;
+			signal(cm);
+			signal(mutex);
+			wait(bb);
+		}
+		else
+		{
+			signal(mutex);			
+		}
+	}		 
+}
+
+void barber()
+{
+
+		barberCut.barber();
+
+} 
+void customer()
+{
+		barberCut.cut();
+} 
+
+void main()
+{
+	barber();
+	customer();
+} 
