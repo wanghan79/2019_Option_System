@@ -1,0 +1,56 @@
+Monitor producecustomer
+{
+int waiting;
+int chairs;
+semaphore Customers,barbers,mutex;
+Customers=0;
+barbers=0;
+waiting=0;
+mutex=1;
+
+void Barber()
+{
+  while(TRUE)
+  {
+    wait(customers);
+    wait(mutex);
+    waiting=waiting-1;
+    signal(barbers);
+    signal(mutex);
+    cut_hair();
+  }
+}
+
+void Customeri()
+{
+  wait(mutex);
+  if(count>N)
+   {signal(mutex)
+     exit shop;
+   }
+  else
+   {
+    count=count+1;
+    if(count>1)
+    {signal(mutex);
+     wait(sofa);
+     sit on the sofa;
+     wait(empty);
+     get up from sofa;
+     signal(sofa);
+    }
+   else
+  {signal(mutex);
+   wait empty;
+  }
+  sit on the barber_chair;
+  signal(full);
+  wait(cut);
+main()
+{
+cobegin
+{  Customeri();
+   Barber();
+}
+}
+)
