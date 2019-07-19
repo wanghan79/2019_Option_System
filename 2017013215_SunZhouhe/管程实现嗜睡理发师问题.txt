@@ -1,0 +1,36 @@
+Monitor procducerconsumer():
+    watting=0;mutex=1;N=10;CM=0;BB=0;total=20;     //N:座椅数  total:总人数
+    for i in range(0,total+1):
+        s[i]=0;                                                                //0表示没剪头，1表示已剪头
+
+    def Get_haircut(i):
+        wait(mutex);				      
+        if(waiting<N):
+            waiting++;
+            signal(mutex);
+            signal(CM);
+            wait(BB);
+            剪头;
+            s[i]=1;			                      //表示该顾客已剪头
+        else:
+            signal(mutex);
+
+    def Cut_hair():
+        wait(CM);	
+        wait(mutex);
+        waitting--;
+        signal(mutex);
+        signal(BB);
+
+def Customer():
+    while(total--):
+        procducerconsumer.Get_haircut(total);
+def Barber():
+    while(1):    
+        procducerconsumer.Cut_hair();
+def main():
+    Customer();
+    Barber();
+    
+    
+    

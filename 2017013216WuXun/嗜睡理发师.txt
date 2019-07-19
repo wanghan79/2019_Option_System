@@ -1,0 +1,47 @@
+monitor SomnolentBarber
+{
+    int waiting;//等待人数
+    int chair;//椅子数量
+    int mutex = 1;
+    int customer = 0;
+    int barber = 0;
+    void CutHair()
+    {
+        睡觉;
+        wait(customer);
+        wait(mutex)；
+        waiting--;
+        signal(barber);
+        signal(mutex);
+    }
+    void WaitCutHair()
+    {
+        wait(mutex);
+        if(waiting<chair)
+        {
+            waiting++;
+            signal(customer);
+            signal(mutex);
+            wait(barber);
+        }
+        else signal(mutex);//人满了，顾客离开
+    }
+    void Customer()
+    {
+        SomnolentBarber.WaitCutHair();
+        在沙发上等待;
+    }
+    void Barber()
+    {
+        while(1)
+        {
+            SomnolentBarber.CutHair();
+            给人剪头发;
+        }
+    }
+    void main()
+    {
+        Barber();
+        Customer();
+    }
+}

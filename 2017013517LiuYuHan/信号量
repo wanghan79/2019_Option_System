@@ -1,0 +1,27 @@
+Swait(s1,t1,d1,...,sn,tn,dn)
+{
+	while(TRUE)
+	{
+		if(s1>=t1&&...&&sn>=tn)
+		{
+			for(i=1;i<=n;i++)
+			si=si-di;
+			break;
+		}
+		else
+		{
+			place the process in the waiting queue associated with the first si found with si<1,and set the program count of this process to the beginning of Swait operation
+		}
+	}
+}
+Ssignal(s1,d1,...,sn,dn)
+{
+	while
+	{
+		for(i=1;i<=n;i++)
+		{
+			si=si+di;
+			remove all the process waiting in the queue associated with si into the ready queue
+		}
+	}
+}

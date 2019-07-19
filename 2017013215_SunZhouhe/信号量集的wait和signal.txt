@@ -1,0 +1,11 @@
+def Swait(s1,t1,d1,...,sn,tn,dn):
+    if s1.value>=t1 and ... sn.value>=tn:
+        for i in range(1,n+1):
+            si.value=si.value-di;
+    else:
+        blockProcessAndResetPC(Sfirstless);
+
+def Ssingnal(s1,t1,d1,...,sn,tn,dn):
+    for i in range(1,n+1):
+        si.value=si.value+di;
+    wakeup(si.L);
