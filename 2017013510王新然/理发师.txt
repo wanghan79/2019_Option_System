@@ -1,0 +1,38 @@
+class  CustomerBarber():
+    sofa=5
+    waiting=0
+    customers=0
+    barbers=0
+    mutex=1
+
+def  GetHaircut():
+    wait(mutex)
+    if waiting<sofa:
+        waiting+=1
+        signal(customers)
+        signal(mutex)
+        wait(barbers)
+        #the barber cut the hair
+    else:
+        signal(mutex)
+
+
+def  CutHair():
+    wait(customers)
+    wait(mutex)
+    waiting-=1
+    #the customer gets the haircut
+    signal(barbers)	
+    signal(mutex)
+
+def  Customer():
+    CustomerBarber.GetHaircut()
+    
+def  Barber():	
+    while True:
+        CustomerBarber.CutHair();
+     
+def  main():
+    Customer()  #cobein    
+    Barber()    #coend
+    

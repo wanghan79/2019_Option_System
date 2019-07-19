@@ -1,0 +1,51 @@
+monitor Barber&customer{
+	int BarberNotBusy ;//理发师初值设为不忙(即睡觉)
+	int customers ;//现在店里正在等待的顾客
+	int call ;//顾客呼叫理发师
+	int mutex ;
+	queue<Type> customerQueue;//顾客类型先定义为Type
+	public:
+	void barberWork(){
+		wait(call)				//等待被叫醒
+		customerQueue.pop();	//顾客站出来
+		customers--;			//等待的顾客数量-1
+		signal(BarberNotBusy);	//告诉大家：我不忙了(理发师睡觉)。我觉得逻辑上，这个放在进行理发之后更合适。
+	}	
+	void customerGetIn(Type Acustomer){		//来了一个顾客；Acustomer
+		wait(mutex);
+		if(customers >= N)					//表示店内顾客人数已饱和
+			离开;
+		else{
+			customerQueue.push(Acustomer);	//这个人进去排队
+			customers++;					//等待的顾客数量+1
+		}
+		signal(mutex);
+	}
+	void customerWait(){
+		if(customers>0){				//有人在等待
+			wait(BarberNotBusy);		//理发师在睡觉
+			signal(call);				//叫醒理发师，让他理发
+		}
+	}
+	{BarberNotBusy = 1,customer = 0,call = 0,mutex = 1}//初值：理发师睡觉，没有顾客，没人呼叫理发师，互斥变量为1
+}PC;
+
+void Barber(){
+	PC.barberWork();
+	理发;
+	睡觉;
+}
+void Customer(){
+	Type person;				//假设这就是进来的顾客
+	PC.customerGetIn(person);	//进店
+	PC.customerWait();			//排队
+	被理发;
+	离开；
+}
+
+void main(){
+	cobegin
+	Barber();
+	Customer();
+	coend
+}

@@ -1,0 +1,45 @@
+Monitor producerconsumer{
+int mutex=1,Customers=0,barber=1,waiting=0,CHAIRS=10; 
+public;
+void barber_do()
+{
+	wait(Customers);
+	wait(mutex);
+	waiting--;
+	signal(barber);
+	signal(mutex);
+	cut_hair();
+} 
+void get_barber()
+{
+	if(waiting<CHAIRS)
+	{
+		waiting=waiting+1;
+		signal(Customers);
+		signal(mutex);
+		wait(barber);
+		get_haircut();
+	}
+	else
+		signal(mutex);
+}
+} PC;
+void barber()
+{
+	while(true)
+	{
+		PC.barber_do(); 
+	}
+}
+void Customer()
+{
+	while(true)
+	{
+		PC.get_barber();
+	}
+}
+void main()
+{
+	barber();
+	Customer();
+}

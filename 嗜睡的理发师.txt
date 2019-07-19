@@ -1,0 +1,57 @@
+Monitor producecustomer
+{
+int waiting;
+int chairs;
+semaphore Customers,barbers,mutex;
+Customers=0;
+barbers=0;
+waiting=0;
+mutex=1;
+
+void Barber()//理发师进程
+{
+  while(TRUE)
+  {
+    wait(customers);//没有顾客，理发师睡觉
+    wait(mutex);
+    waiting=waiting-1;
+    signal(barbers);//理发师工作
+    signal(mutex);//离开临界区
+    cut_hair();
+  }
+}
+
+void Customeri()//顾客i的进程
+{
+  wait(mutex);
+  if(count>N)//理发店没有空位
+   {signal(mutex)
+     exit shop;
+   }
+  else
+   {
+    count=count+1;
+    if(count>1)//理发店有客人，需要坐在沙发上等待
+    {signal(mutex);
+     wait(sofa);//申请沙发
+     sit on the sofa;
+     wait(empty);//申请理发椅
+     get up from sofa;
+     signal(sofa);//归还沙发
+    }
+   else
+  {signal(mutex);
+   wait empty;//只有一个人，可直接申请理发椅
+  }
+  sit on the barber_chair;
+  signal(full);
+  wait(cut);
+
+main()
+{
+cobegin
+{  Customeri();
+   Barber();
+}
+}
+)
